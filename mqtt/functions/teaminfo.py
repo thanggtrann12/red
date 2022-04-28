@@ -34,20 +34,3 @@ teamCode = [
     "11 08 D7 2B"
 
 ]
-teamData = ""
-
-
-def setInfo(payload):
-    global teamData
-    if payload != "":
-        teamData = payload
-        return teamData
-
-
-def getInfo():
-
-    global teamData
-    if teamData == "":
-        return None
-    else:
-        return teamData
