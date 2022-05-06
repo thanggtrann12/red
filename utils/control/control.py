@@ -1,5 +1,5 @@
 import json
-from jsons.jsonParse import getData
+from jsons.jsonParse import *
 from utils.setting.image import IMGShow
 from PyQt5 import QtWidgets
 from utils.control.checkpoint import checkpoint
@@ -14,7 +14,6 @@ def control(self):
 
     data = getData()
     if data != None:
-        print(data)
         jsonData = json.loads(str(data).replace("'", '"'))
         if jsonData["Name"] != "":
             self.Name.setText(jsonData["Name"])
@@ -23,10 +22,11 @@ def control(self):
         if jsonData["Size"] != "":
             self.Size.setText(jsonData["Size"])
         imageName = jsonData['Name']
-        imageLink = "assets/images/"+imageName+".jpg"
+        imageName = imageName.upper()
+        imageLink = "assets/images/"+imageName.replace(" ","_")+".png"
         if lastLink != imageLink:
             IMGShow(self, imageLink)
             lastLink = imageLink
+    checkpoint(self)
 
 
-        # checkpoint(self, int(jsonData['CheckPoint']))
