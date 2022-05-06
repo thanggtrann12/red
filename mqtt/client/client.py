@@ -95,9 +95,11 @@ def client_loop(client,broker,port,keepalive=60,loop_function=None,          loo
 def on_message(client, userdata, message):
     time.sleep(0.1)
     if message.topic == "RedTeam":
-        if client.subscribe(message.payload.decode("utf-8")):
-            print("subscribed to ",message.payload.decode("utf-8"))
-            client.suback_flag=True
+        topic = str(message.payload)
+        print("topic:",topic[2:14])
+        if client.subscribe(topic[2:13]):
+            print("subscribed to ",topic[2:13])
+        client.suback_flag=True
     for key, val in teamCode.items():
         if message.topic == key:
             payload = str(message.payload.decode())
